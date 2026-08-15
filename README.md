@@ -18,6 +18,8 @@
 
 本项目不是 Fluent 的替代品，也不是已经完成生产级科学认证的气动数据库。当前科学资格为 **`PROVISIONAL`**，不能把程序正常结束或 screening pass 描述为生产级 CFD 结论。
 
+> `2.0.1rc1` 是 **Pre-release candidate**：用于公开审阅新的 AI 监督 C-grid 流程，不替代 `v2.0.0` 稳定基线，也不代表生产级 CFD 资格。
+
 ## 主要功能
 
 ### 1. 一句话生成计划
@@ -34,8 +36,8 @@
 
 - 尾缘闭合只允许 `auto`、`sharp`、`blunt`；
 - 流动条件在速度、Reynolds 数和 Mach 数之间严格三选一；
-- 主网格目标固定为 48,458 单元；
-- 任何入口的硬上限固定为 80,000 单元；
+- 网格模式固定为 `ai_supervised_cgrid`，单元数只允许作为 AI 软偏好；
+- 每次任务拥有可配置的 `max_cells` 硬预算（默认 80,000）和最多候选数（默认 5）；
 - 面积、逐截面局部厚度和升力比例门禁不能由 AI 降低；
 - SSH 请求只允许引用管理员管理的 profile ID。
 
@@ -43,7 +45,8 @@
 
 - 主路径为结构化全四边形 C-grid；
 - O-grid 仅用于显式诊断，不作为静默 fallback；
-- 自动修复保持 48,458 单元，通过分布、聚类和受控平滑改善质量；
+- `confirm` 后停在 `MESH`，AI 按便携 Skill 设计、实测并帕累托比较最多 5 个候选；
+- 不再自动运行 `distribution_repair_48k`，也不按单一最低 OQ 自动选网格；
 - GCI 候选网格为 25,182 / 44,098 / 77,340；
 - 网格门禁包含单元数、正交质量、偏斜率、边界层拓扑和边界覆盖；
 - 优化按“可行性优先、最小化阻力”执行，并保留面积、局部厚度和升力约束。
@@ -57,7 +60,7 @@ NEEDS_INPUT -> PLANNED -> CONFIRMED -> PREFLIGHT -> MESH -> BASELINE
 -> OPTIMIZATION -> VALIDATION -> GRID_QUALIFICATION -> REPORTING -> 终态
 ```
 
-事件写入 SHA-256 串联的只追加日志，最新状态采用原子写入。运行支持查询、幂等取消和从安全 checkpoint 恢复；结果中的执行状态、设计状态和证据状态相互独立。
+状态转移写入 SHA-256 串联的只追加日志，高频 heartbeat 只更新原子状态快照。运行支持查询、幂等取消、死进程识别和从安全 checkpoint 恢复；仍存活的后台引擎可按同一 run ID 重新挂接。结果中的执行状态、设计状态和证据状态相互独立。
 
 ### 6. 经验数据接口
 
@@ -121,6 +124,12 @@ py -3.12 -m venv .venv
 
 # 审阅计划后只确认一次
 .\RUN_WORKFLOW.cmd confirm --plan-id plan-...
+
+# 非 dry-run 会停在 MESH；AI 读取任务、提交候选并显式验收
+.\RUN_WORKFLOW.cmd mesh-brief --run-id run-...
+.\RUN_WORKFLOW.cmd mesh-evaluate --run-id run-... --proposal candidate.json
+.\RUN_WORKFLOW.cmd mesh-accept --run-id run-... --attempt-id attempt_001 --decision decision.json
+.\RUN_WORKFLOW.cmd resume --run-id run-...
 
 # 查询状态和结果
 .\RUN_WORKFLOW.cmd status --run-id run-...
