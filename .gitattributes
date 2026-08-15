@@ -1,0 +1,17 @@
+* text=auto
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+*.py text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.dat text eol=lf
+*.whl binary
+*.dll binary
+*.exe binary
+*.pyd binary
+*.zip binary
+*.h5 binary
+*.cas binary
+*.msh binary
+runtime/** binary
+wheelhouse/packages/** binary

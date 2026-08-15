@@ -1,0 +1,17 @@
+.venv/
+.pytest_cache/
+.airfoil-workflow/
+runs/
+work/
+diagnostics/
+imports/
+dist/*
+!dist/.gitkeep
+experience/ledger/*.jsonl
+experience/cas/*
+experience/keys/*
+experience/objects/*
+experience/quarantine/*
+__pycache__/
+*.pyc
+*.trn

@@ -1,0 +1,5 @@
+This distribution does not include ANSYS Fluent or an ANSYS license.
+
+Third-party Python packages are redistributed as wheels in wheelhouse/packages.
+See SBOM.cdx.json and wheelhouse/WHEELHOUSE_MANIFEST.json in a built release for
+package names, versions and cryptographic hashes.
