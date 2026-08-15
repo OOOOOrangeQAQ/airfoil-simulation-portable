@@ -1,6 +1,8 @@
 # Airfoil Simulation Portable CLI
 
-面向 AI 受控调用的翼型仿真与优化 CLI 工作流，适用于 Windows、ANSYS Fluent 2025 R1 和 Python 3.12。
+面向 AI 受控调用的翼型仿真与优化 CLI 工作流，适用于 Windows、ANSYS Fluent 2025 R1 和 Python 3.12，别的版本没测试，我的电脑上也没有，谁测了发我看看😋。
+
+希望各位CFD同道能测试反馈一下啊，不过估计也没人看:(。我也不确定在别的电脑环境上能用不能，反正我自己的电脑用的没问题，目前已经测试过的ai有Codex-Chatgpt，Opencode-Deepseek-V4-Flash。别用V2.0.0,有BUG
 
 > English summary: an offline-first, policy-gated command-line workflow for airfoil meshing, Fluent simulation, optimization orchestration, resumable state management, and auditable AI interaction. The public interface is CLI-only. ANSYS Fluent and its license are not included.
 
