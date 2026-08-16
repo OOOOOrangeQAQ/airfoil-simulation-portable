@@ -39,7 +39,7 @@ class ReleaseBuilderTests(unittest.TestCase):
 
     def test_project_version_is_read_from_pyproject(self) -> None:
         builder = _load_builder()
-        self.assertEqual(builder._project_version(), "2.0.1")
+        self.assertEqual(builder._project_version(), "2.0.2")
 
 
 if __name__ == "__main__":
