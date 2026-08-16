@@ -14,6 +14,8 @@ RUN_WORKFLOW.cmd answer --plan-id plan-... --values '{"flow":{"altitude_m":0}}'
 RUN_WORKFLOW.cmd confirm --plan-id plan-...
 RUN_WORKFLOW.cmd mesh-brief --run-id run-...
 RUN_WORKFLOW.cmd mesh-evaluate --run-id run-... --proposal candidate.json
+# 仅当所有 AI 候选失败且 mesh-brief 返回 fallback.status=AVAILABLE
+RUN_WORKFLOW.cmd mesh-fallback --run-id run-...
 RUN_WORKFLOW.cmd mesh-accept --run-id run-... --attempt-id attempt_001 --decision decision.json
 RUN_WORKFLOW.cmd resume --run-id run-...
 RUN_WORKFLOW.cmd status --id run-...
@@ -33,6 +35,11 @@ CLI 使用严格 JobSpec 2.0。网格契约为 `mode=ai_supervised_cgrid`、可�
 当输入 Re 时，系统用海拔、物理弦长及 ISA-1976/Sutherland 空气性质反解速度；输入 Mach 时按该海拔声速反解速度。可选温度会在该海拔标准压力下参与密度、黏度和声速计算。原始输入、推导速度、Re、Mach 和大气参数都会写入 resolved config。
 
 一句话中的单元数是软偏好；系统把任务 `max_cells` 提升到至少覆盖该偏好。候选仍必须逐个通过任务级硬预算、结构检查、Fluent 读入和 100 次一阶试算，工作流不会自行加密或选择候选。
+
+原 48,458 单元固定 C-grid 不是正常候选。只有 AI 候选预算耗尽且所有候选均不可验收时，
+`mesh-brief` 才把一次性回退标为 `AVAILABLE`。弱 AI 此时可以调用 `mesh-fallback`，审核
+同一组硬门禁和 100 次试算证据，再通过 `mesh-accept --attempt-id attempt_fixed_fallback`
+显式签署；回退失败必须停在 `MESH`。
 
 接受所有推荐默认值：
 
