@@ -20,6 +20,7 @@ from .service import (
     mesh_accept,
     mesh_brief,
     mesh_evaluate,
+    mesh_fallback,
     result,
     resume_run,
     status,
@@ -116,6 +117,9 @@ def build_parser() -> argparse.ArgumentParser:
     evaluate.add_argument("--run-id", required=True)
     evaluate.add_argument("--proposal", required=True, help="Candidate JSON object or JSON file.")
 
+    fallback = sub.add_parser("mesh-fallback", help="Evaluate the unchanged fixed C-grid after all AI candidates fail.")
+    fallback.add_argument("--run-id", required=True)
+
     accept = sub.add_parser("mesh-accept", help="Explicitly accept one eligible Pareto C-grid candidate.")
     accept.add_argument("--run-id", required=True)
     accept.add_argument("--attempt-id", required=True)
@@ -174,6 +178,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             return EXIT_OK
         if args.command == "mesh-evaluate":
             _emit(mesh_evaluate(args.run_id, _json_object(args.proposal, "--proposal"), workspace), pretty=not args.compact)
+            return EXIT_OK
+        if args.command == "mesh-fallback":
+            _emit(mesh_fallback(args.run_id, workspace), pretty=not args.compact)
             return EXIT_OK
         if args.command == "mesh-accept":
             _emit(

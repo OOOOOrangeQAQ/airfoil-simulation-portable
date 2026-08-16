@@ -12,7 +12,12 @@ from .execution import compile_engine_config, execute_request
 from .fsm import TERMINAL_STATES, StateError, append_event, atomic_json, create_state, directory_lock, read_checkpoint, read_json, transition, utc_now, verify_event_log
 from .intent_parser import PROPOSED_DEFAULTS, parse_intent, questions_for, safe_merge_answers
 from .jobspec import spec_digest, validate_job_spec
-from .mesh_supervision import accept_mesh_candidate, evaluate_mesh_candidate, mesh_brief as read_mesh_brief
+from .mesh_supervision import (
+    accept_mesh_candidate,
+    evaluate_fixed_mesh_fallback,
+    evaluate_mesh_candidate,
+    mesh_brief as read_mesh_brief,
+)
 
 
 def workspace_path(value: str | Path | None = None) -> Path:
@@ -147,13 +152,24 @@ def resume_run(run_id: str, workspace: Path) -> dict[str, Any]:
     if state["state"] == "REJECTED":
         raise StateError("a scientifically rejected run cannot be resumed; make a new plan")
     if state["state"] == "MESH" and read_checkpoint(run_root, "mesh_accepted") is None:
+        brief = read_mesh_brief(run_root)
+        fallback_status = brief["fallback"]["status"]
+        if fallback_status == "AVAILABLE":
+            message = "AI candidates are exhausted; run mesh-fallback, audit its evidence, and explicitly accept it before resume."
+        elif fallback_status == "FAILED":
+            message = "The fixed fallback also failed a hard gate; the run remains unresolved in MESH."
+        elif fallback_status == "BLOCKED_CELL_BUDGET":
+            message = "The fixed fallback exceeds this run's hard cell budget; the run remains unresolved in MESH."
+        else:
+            message = "No accepted mesh checkpoint exists; evaluate and accept a candidate before resume."
         waiting = {
-            "execution_status": "WAITING_FOR_AI_MESH",
+            "execution_status": brief["status"],
             "design_status": "NOT_EVALUATED",
             "evidence_status": "NOT_EVALUATED",
-            "outcome": "WAITING_FOR_AI_MESH",
-            "message": "No accepted mesh checkpoint exists; evaluate and accept a candidate before resume.",
-            "remaining_candidates": read_mesh_brief(run_root)["remaining_candidates"],
+            "outcome": brief["status"],
+            "message": message,
+            "remaining_candidates": brief["remaining_candidates"],
+            "fallback": brief["fallback"],
         }
         return {"run": state, "result": waiting, "idempotent": True}
     request = read_json(run_root / "request.json")
@@ -186,6 +202,13 @@ def mesh_evaluate(run_id: str, proposal: Mapping[str, Any], workspace: Path) -> 
     request = read_json(run_root / "request.json")
     config = compile_engine_config(request, run_root)
     return evaluate_mesh_candidate(run_root, config, proposal)
+
+
+def mesh_fallback(run_id: str, workspace: Path) -> dict[str, Any]:
+    run_root = _run_root(workspace, run_id)
+    request = read_json(run_root / "request.json")
+    config = compile_engine_config(request, run_root)
+    return evaluate_fixed_mesh_fallback(run_root, config)
 
 
 def mesh_accept(run_id: str, attempt_id: str, decision: Mapping[str, Any], workspace: Path) -> dict[str, Any]:
