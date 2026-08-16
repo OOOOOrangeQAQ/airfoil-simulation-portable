@@ -1,0 +1,4 @@
+interface:
+  display_name: "Optimize Airfoil C-grid"
+  short_description: "Build and qualify adaptive Fluent C-grids"
+  default_prompt: "Use $optimize-airfoil-cgrid to design, evaluate, and select a Fluent-ready C-grid for this airfoil; invoke the unchanged fixed fallback only after every AI candidate is ineligible."
