@@ -1,0 +1,536 @@
+{
+  "schema_version": 2,
+  "created_at": "2026-08-16T06:12:22Z",
+  "origin": "controlled reverse merge; source handoff retained separately and is not a runtime dependency",
+  "patchset": "airfoil-simulation-portable-2",
+  "bundled_hash": "5a62ebcff640be863522642f292abf6f5beea7a4c90c294dc740c321f9f7e75e",
+  "bundled_file_count": 45,
+  "bundled_bytes": 721036,
+  "files": [
+    {
+      "path": "airfoil_fluentmeshing/__init__.py",
+      "sha256": "aea010f092f2eed671dab36c337ab4d25a14996492c34fec606ef7d3255e844e",
+      "size": 69
+    },
+    {
+      "path": "airfoil_fluentmeshing/adjoint_audit.py",
+      "sha256": "27098431ec3bbb77c48c94ae2ba139a5f23633833ae8c92b9df1a5c7afd98799",
+      "size": 60129
+    },
+    {
+      "path": "airfoil_fluentmeshing/adjoint_mesh_pipeline.py",
+      "sha256": "4e84c735ed11b5fbc84ddeb08a04e3bddd471c4e8e233791b157f14761026f82",
+      "size": 28032
+    },
+    {
+      "path": "airfoil_fluentmeshing/adjoint_optimizer.py",
+      "sha256": "752cc8a33e4abf6663c65aef763853330ddebbea0a1fc2424817663fb7e19c93",
+      "size": 955
+    },
+    {
+      "path": "airfoil_fluentmeshing/adjoint_pipeline.py",
+      "sha256": "689d43c64d833663028fb72742b39b152023524b7d0eb1e37f7bccc9e090456b",
+      "size": 7798
+    },
+    {
+      "path": "airfoil_fluentmeshing/adjoint_runtime.py",
+      "sha256": "da6820a3ba70746b70d2623a4d37d1f17fb27047d40d6364ee3bd94d65143c74",
+      "size": 178820
+    },
+    {
+      "path": "airfoil_fluentmeshing/adjoint_support.py",
+      "sha256": "8931b79c22dfff1503f181659a825d510f7968b7441be57f865c4acab66aae84",
+      "size": 11723
+    },
+    {
+      "path": "airfoil_fluentmeshing/boundary_layer.py",
+      "sha256": "8b9bfe586142b8607bcc8d517bdcc6e1896d3d1387e3f54bb3f176a0abed26d9",
+      "size": 6720
+    },
+    {
+      "path": "airfoil_fluentmeshing/cfd_qualification.py",
+      "sha256": "1cd3d89d2f5879fc7e891452548c7b50906f14b7f4d1dd2713ba0ceaddad78aa",
+      "size": 19673
+    },
+    {
+      "path": "airfoil_fluentmeshing/cgrid/__init__.py",
+      "sha256": "588f6c36faa39057dbd9f0383172ef689c39407852fa2aba3169d3dc3dd25f77",
+      "size": 74
+    },
+    {
+      "path": "airfoil_fluentmeshing/cgrid/cli.py",
+      "sha256": "3f4392763794c5111cc5385e6c07cb1fa0994064aa6529263315f69985fbcd15",
+      "size": 13008
+    },
+    {
+      "path": "airfoil_fluentmeshing/cgrid/export.py",
+      "sha256": "046e763effd22bec4114ebc6204577a2d89d328ec82bb01bdc351e8ba9718b18",
+      "size": 11941
+    },
+    {
+      "path": "airfoil_fluentmeshing/cgrid/geometry.py",
+      "sha256": "9167f5ea8001eabe906c8daaf210859c3246d53877f55dd10486972c3a5783e2",
+      "size": 28160
+    },
+    {
+      "path": "airfoil_fluentmeshing/cgrid/mesh.py",
+      "sha256": "37f5137bdcd959eeaf735953e63a4b4612292ed8d795caea7fc2a78deab6eea5",
+      "size": 17765
+    },
+    {
+      "path": "airfoil_fluentmeshing/cgrid/models.py",
+      "sha256": "a0618a75613bacf88189d2ef9086b5942fd8ec63ad3d007f1b249b41c67a47b5",
+      "size": 863
+    },
+    {
+      "path": "airfoil_fluentmeshing/cgrid/quality.py",
+      "sha256": "120752ee3175439a9d61310d37efb70b1502cf8bfd65157e9809059600f20776",
+      "size": 27123
+    },
+    {
+      "path": "airfoil_fluentmeshing/cst.py",
+      "sha256": "c966368356123c1677a852c723cc4901d1df6bfe355104f972af3b58db986be4",
+      "size": 5169
+    },
+    {
+      "path": "airfoil_fluentmeshing/entry_modes.py",
+      "sha256": "0f07f95dff1ae49a73b58603239d397ee5308b4285d1582c916e8874b5065aa9",
+      "size": 32313
+    },
+    {
+      "path": "airfoil_fluentmeshing/envelope.py",
+      "sha256": "db91de8aac5727a5c2f00daf40b2d01397c6a13063bca1d592f0cb0c54d19809",
+      "size": 6213
+    },
+    {
+      "path": "airfoil_fluentmeshing/fluent_runner.py",
+      "sha256": "55774782e821377dc2ac106f26703175e77aad3a2e0f37c32145a0aa47a28b14",
+      "size": 20713
+    },
+    {
+      "path": "airfoil_fluentmeshing/geometry.py",
+      "sha256": "6a68ca5e537fb3096d30c95e1b52088e7aab44e10ed931cceb941819f2c1f2c3",
+      "size": 13234
+    },
+    {
+      "path": "airfoil_fluentmeshing/mesh_policy.py",
+      "sha256": "293fa85b570e7895fadbd497bdcec37d5de7ee1a79e3d37c0d60dfed499282a5",
+      "size": 4168
+    },
+    {
+      "path": "airfoil_fluentmeshing/ogrid.py",
+      "sha256": "3a61f0f6eabcea9987db4f1894c2bf0f979a722d8c65d86339e2f7e778697395",
+      "size": 21705
+    },
+    {
+      "path": "airfoil_fluentmeshing/optimization_profiles.py",
+      "sha256": "2c85d06230d8ffe64411fbae8a1134ed41d50cb256a7bf73086c2811df368e10",
+      "size": 13198
+    },
+    {
+      "path": "airfoil_fluentmeshing/shape_guard.py",
+      "sha256": "3f7525137a7858928cc0812c4cdaeac34566df5ec07ada151faff786ac2fadb1",
+      "size": 14147
+    },
+    {
+      "path": "airfoil_fluentmeshing/trust.py",
+      "sha256": "14600b5bf662cead7f9d59718f8a0cf3c9ee8aeaa8a7055f401c3a776c702de9",
+      "size": 17827
+    },
+    {
+      "path": "config/adjoint_optimization.example.json",
+      "sha256": "187b306d9398bcab11e2742e8702dd41c4b4ef60270c601d4dbc873e28cfc428",
+      "size": 11034
+    },
+    {
+      "path": "config/grid_family.production.json",
+      "sha256": "0f7fa46194b6953f061cbfbf753470f8406b13826d506c1dd007f495ef8e0c05",
+      "size": 524
+    },
+    {
+      "path": "config/grid_family.systematic.json",
+      "sha256": "0f7fa46194b6953f061cbfbf753470f8406b13826d506c1dd007f495ef8e0c05",
+      "size": 524
+    },
+    {
+      "path": "config/stage1_request.example.json",
+      "sha256": "381efabf78955dff241c045eb68a0423e70adfff1e82f7ebdb287b7ed3950958",
+      "size": 1519
+    },
+    {
+      "path": "config/stage1_request.portable.example.json",
+      "sha256": "ff97d21489809ac77519037b49d59629f3acde4ae295db4aaa1c11ab226d7f85",
+      "size": 1507
+    },
+    {
+      "path": "scripts/aggregate_grid_gci.py",
+      "sha256": "b892b7c38336f08f7ece807e583c8dc19059aeddac1bb32491ef0dd2441dd997",
+      "size": 1089
+    },
+    {
+      "path": "scripts/cgrid/fluent_check_cgrid.py",
+      "sha256": "8a45810d478d64e2a7e6f03cee611e2e22a6d4e98d0bd0f7bd2f7eabb5103d30",
+      "size": 18308
+    },
+    {
+      "path": "scripts/cgrid/generate_cgrid.py",
+      "sha256": "c83c7156df36eb9c5965093a9033ee5211ff5a0d270a257dcc869c05512e326e",
+      "size": 580
+    },
+    {
+      "path": "scripts/postprocess/compare_airfoils_tecplot.py",
+      "sha256": "422f8c4b525f0f2033aa27c836653d7b24be275017e628e26f0aa742a61ab0f6",
+      "size": 13449
+    },
+    {
+      "path": "scripts/reaudit_optimization_summary.py",
+      "sha256": "23847e60499f87e1deb48b31d197634fba00d15c38b3d8c5d1bfaa8acfb1b6b1",
+      "size": 4156
+    },
+    {
+      "path": "scripts/resume_lift_tradeoff_winners.py",
+      "sha256": "a879167b17eb35c8ffcbcd3e8e9d9c37114a78bcccd7e18a7b1abafa74d6ea08",
+      "size": 9904
+    },
+    {
+      "path": "scripts/resume_sequential_optimization.py",
+      "sha256": "57473c2e313d7fe631506518d84c70e76d41bf0be1a9c8b8dab370faa770d3fa",
+      "size": 7352
+    },
+    {
+      "path": "scripts/run_airfoil_adjoint_optimization.py",
+      "sha256": "d4092bcf3cc181253a7e98f642b06ca9a1d4cbfca8c961e6e2fd6f8b32f5d0ba",
+      "size": 18111
+    },
+    {
+      "path": "scripts/run_grid_family_qualification.py",
+      "sha256": "29d5898dfd21011283ae2c1037f439813b1d0e838862c70450965da127ab5710",
+      "size": 14171
+    },
+    {
+      "path": "scripts/run_lift_tradeoff_continuation.py",
+      "sha256": "609298ae5384539526e0a28fdbed7a5f9f3ebcdcc9e1ad1ac9014a6f9dacfccc",
+      "size": 2944
+    },
+    {
+      "path": "scripts/run_lift_tradeoff_experiment.py",
+      "sha256": "9059ea887d321862a8152a402c36d9540d728029714f9d5c0152c4bd847ede3e",
+      "size": 19877
+    },
+    {
+      "path": "scripts/run_quick_cfd_validation.py",
+      "sha256": "4ec044bf907ff308a871c3a25743d132b403200481ea93772c3aa8b3cc3ee9aa",
+      "size": 5385
+    },
+    {
+      "path": "scripts/run_stage1.py",
+      "sha256": "bd2909e4c3559de19d088d4d8d4f738bb8755b402ca7f857fa845d460d740228",
+      "size": 23947
+    },
+    {
+      "path": "scripts/validate_final_checkpoint.py",
+      "sha256": "961d03287eee0fbb7add2fd266e3bbd224675f1ad98e40b9746330db96c4de20",
+      "size": 5115
+    }
+  ],
+  "bundled_files": [
+    {
+      "path": "airfoil_fluentmeshing/__init__.py",
+      "sha256": "aea010f092f2eed671dab36c337ab4d25a14996492c34fec606ef7d3255e844e",
+      "size": 69
+    },
+    {
+      "path": "airfoil_fluentmeshing/adjoint_audit.py",
+      "sha256": "27098431ec3bbb77c48c94ae2ba139a5f23633833ae8c92b9df1a5c7afd98799",
+      "size": 60129
+    },
+    {
+      "path": "airfoil_fluentmeshing/adjoint_mesh_pipeline.py",
+      "sha256": "4e84c735ed11b5fbc84ddeb08a04e3bddd471c4e8e233791b157f14761026f82",
+      "size": 28032
+    },
+    {
+      "path": "airfoil_fluentmeshing/adjoint_optimizer.py",
+      "sha256": "752cc8a33e4abf6663c65aef763853330ddebbea0a1fc2424817663fb7e19c93",
+      "size": 955
+    },
+    {
+      "path": "airfoil_fluentmeshing/adjoint_pipeline.py",
+      "sha256": "689d43c64d833663028fb72742b39b152023524b7d0eb1e37f7bccc9e090456b",
+      "size": 7798
+    },
+    {
+      "path": "airfoil_fluentmeshing/adjoint_runtime.py",
+      "sha256": "da6820a3ba70746b70d2623a4d37d1f17fb27047d40d6364ee3bd94d65143c74",
+      "size": 178820
+    },
+    {
+      "path": "airfoil_fluentmeshing/adjoint_support.py",
+      "sha256": "8931b79c22dfff1503f181659a825d510f7968b7441be57f865c4acab66aae84",
+      "size": 11723
+    },
+    {
+      "path": "airfoil_fluentmeshing/boundary_layer.py",
+      "sha256": "8b9bfe586142b8607bcc8d517bdcc6e1896d3d1387e3f54bb3f176a0abed26d9",
+      "size": 6720
+    },
+    {
+      "path": "airfoil_fluentmeshing/cfd_qualification.py",
+      "sha256": "1cd3d89d2f5879fc7e891452548c7b50906f14b7f4d1dd2713ba0ceaddad78aa",
+      "size": 19673
+    },
+    {
+      "path": "airfoil_fluentmeshing/cgrid/__init__.py",
+      "sha256": "588f6c36faa39057dbd9f0383172ef689c39407852fa2aba3169d3dc3dd25f77",
+      "size": 74
+    },
+    {
+      "path": "airfoil_fluentmeshing/cgrid/cli.py",
+      "sha256": "3f4392763794c5111cc5385e6c07cb1fa0994064aa6529263315f69985fbcd15",
+      "size": 13008
+    },
+    {
+      "path": "airfoil_fluentmeshing/cgrid/export.py",
+      "sha256": "046e763effd22bec4114ebc6204577a2d89d328ec82bb01bdc351e8ba9718b18",
+      "size": 11941
+    },
+    {
+      "path": "airfoil_fluentmeshing/cgrid/geometry.py",
+      "sha256": "9167f5ea8001eabe906c8daaf210859c3246d53877f55dd10486972c3a5783e2",
+      "size": 28160
+    },
+    {
+      "path": "airfoil_fluentmeshing/cgrid/mesh.py",
+      "sha256": "37f5137bdcd959eeaf735953e63a4b4612292ed8d795caea7fc2a78deab6eea5",
+      "size": 17765
+    },
+    {
+      "path": "airfoil_fluentmeshing/cgrid/models.py",
+      "sha256": "a0618a75613bacf88189d2ef9086b5942fd8ec63ad3d007f1b249b41c67a47b5",
+      "size": 863
+    },
+    {
+      "path": "airfoil_fluentmeshing/cgrid/quality.py",
+      "sha256": "120752ee3175439a9d61310d37efb70b1502cf8bfd65157e9809059600f20776",
+      "size": 27123
+    },
+    {
+      "path": "airfoil_fluentmeshing/cst.py",
+      "sha256": "c966368356123c1677a852c723cc4901d1df6bfe355104f972af3b58db986be4",
+      "size": 5169
+    },
+    {
+      "path": "airfoil_fluentmeshing/entry_modes.py",
+      "sha256": "0f07f95dff1ae49a73b58603239d397ee5308b4285d1582c916e8874b5065aa9",
+      "size": 32313
+    },
+    {
+      "path": "airfoil_fluentmeshing/envelope.py",
+      "sha256": "db91de8aac5727a5c2f00daf40b2d01397c6a13063bca1d592f0cb0c54d19809",
+      "size": 6213
+    },
+    {
+      "path": "airfoil_fluentmeshing/fluent_runner.py",
+      "sha256": "55774782e821377dc2ac106f26703175e77aad3a2e0f37c32145a0aa47a28b14",
+      "size": 20713
+    },
+    {
+      "path": "airfoil_fluentmeshing/geometry.py",
+      "sha256": "6a68ca5e537fb3096d30c95e1b52088e7aab44e10ed931cceb941819f2c1f2c3",
+      "size": 13234
+    },
+    {
+      "path": "airfoil_fluentmeshing/mesh_policy.py",
+      "sha256": "293fa85b570e7895fadbd497bdcec37d5de7ee1a79e3d37c0d60dfed499282a5",
+      "size": 4168
+    },
+    {
+      "path": "airfoil_fluentmeshing/ogrid.py",
+      "sha256": "3a61f0f6eabcea9987db4f1894c2bf0f979a722d8c65d86339e2f7e778697395",
+      "size": 21705
+    },
+    {
+      "path": "airfoil_fluentmeshing/optimization_profiles.py",
+      "sha256": "2c85d06230d8ffe64411fbae8a1134ed41d50cb256a7bf73086c2811df368e10",
+      "size": 13198
+    },
+    {
+      "path": "airfoil_fluentmeshing/shape_guard.py",
+      "sha256": "3f7525137a7858928cc0812c4cdaeac34566df5ec07ada151faff786ac2fadb1",
+      "size": 14147
+    },
+    {
+      "path": "airfoil_fluentmeshing/trust.py",
+      "sha256": "14600b5bf662cead7f9d59718f8a0cf3c9ee8aeaa8a7055f401c3a776c702de9",
+      "size": 17827
+    },
+    {
+      "path": "config/adjoint_optimization.example.json",
+      "sha256": "187b306d9398bcab11e2742e8702dd41c4b4ef60270c601d4dbc873e28cfc428",
+      "size": 11034
+    },
+    {
+      "path": "config/grid_family.production.json",
+      "sha256": "0f7fa46194b6953f061cbfbf753470f8406b13826d506c1dd007f495ef8e0c05",
+      "size": 524
+    },
+    {
+      "path": "config/grid_family.systematic.json",
+      "sha256": "0f7fa46194b6953f061cbfbf753470f8406b13826d506c1dd007f495ef8e0c05",
+      "size": 524
+    },
+    {
+      "path": "config/stage1_request.example.json",
+      "sha256": "381efabf78955dff241c045eb68a0423e70adfff1e82f7ebdb287b7ed3950958",
+      "size": 1519
+    },
+    {
+      "path": "config/stage1_request.portable.example.json",
+      "sha256": "ff97d21489809ac77519037b49d59629f3acde4ae295db4aaa1c11ab226d7f85",
+      "size": 1507
+    },
+    {
+      "path": "scripts/aggregate_grid_gci.py",
+      "sha256": "b892b7c38336f08f7ece807e583c8dc19059aeddac1bb32491ef0dd2441dd997",
+      "size": 1089
+    },
+    {
+      "path": "scripts/cgrid/fluent_check_cgrid.py",
+      "sha256": "8a45810d478d64e2a7e6f03cee611e2e22a6d4e98d0bd0f7bd2f7eabb5103d30",
+      "size": 18308
+    },
+    {
+      "path": "scripts/cgrid/generate_cgrid.py",
+      "sha256": "c83c7156df36eb9c5965093a9033ee5211ff5a0d270a257dcc869c05512e326e",
+      "size": 580
+    },
+    {
+      "path": "scripts/postprocess/compare_airfoils_tecplot.py",
+      "sha256": "422f8c4b525f0f2033aa27c836653d7b24be275017e628e26f0aa742a61ab0f6",
+      "size": 13449
+    },
+    {
+      "path": "scripts/reaudit_optimization_summary.py",
+      "sha256": "23847e60499f87e1deb48b31d197634fba00d15c38b3d8c5d1bfaa8acfb1b6b1",
+      "size": 4156
+    },
+    {
+      "path": "scripts/resume_lift_tradeoff_winners.py",
+      "sha256": "a879167b17eb35c8ffcbcd3e8e9d9c37114a78bcccd7e18a7b1abafa74d6ea08",
+      "size": 9904
+    },
+    {
+      "path": "scripts/resume_sequential_optimization.py",
+      "sha256": "57473c2e313d7fe631506518d84c70e76d41bf0be1a9c8b8dab370faa770d3fa",
+      "size": 7352
+    },
+    {
+      "path": "scripts/run_airfoil_adjoint_optimization.py",
+      "sha256": "d4092bcf3cc181253a7e98f642b06ca9a1d4cbfca8c961e6e2fd6f8b32f5d0ba",
+      "size": 18111
+    },
+    {
+      "path": "scripts/run_grid_family_qualification.py",
+      "sha256": "29d5898dfd21011283ae2c1037f439813b1d0e838862c70450965da127ab5710",
+      "size": 14171
+    },
+    {
+      "path": "scripts/run_lift_tradeoff_continuation.py",
+      "sha256": "609298ae5384539526e0a28fdbed7a5f9f3ebcdcc9e1ad1ac9014a6f9dacfccc",
+      "size": 2944
+    },
+    {
+      "path": "scripts/run_lift_tradeoff_experiment.py",
+      "sha256": "9059ea887d321862a8152a402c36d9540d728029714f9d5c0152c4bd847ede3e",
+      "size": 19877
+    },
+    {
+      "path": "scripts/run_quick_cfd_validation.py",
+      "sha256": "4ec044bf907ff308a871c3a25743d132b403200481ea93772c3aa8b3cc3ee9aa",
+      "size": 5385
+    },
+    {
+      "path": "scripts/run_stage1.py",
+      "sha256": "bd2909e4c3559de19d088d4d8d4f738bb8755b402ca7f857fa845d460d740228",
+      "size": 23947
+    },
+    {
+      "path": "scripts/validate_final_checkpoint.py",
+      "sha256": "961d03287eee0fbb7add2fd266e3bbd224675f1ad98e40b9746330db96c4de20",
+      "size": 5115
+    }
+  ],
+  "patches": [
+    {
+      "id": "scoped-fluent-process-tree-cleanup",
+      "reason": "Each local PyFluent session closes only its recorded Fluent, Cortex and MPI process tree"
+    },
+    {
+      "id": "solver-evaluation-budget-and-fifth-profile",
+      "reason": "The global evaluation ceiling is enforced and five-run requests have five distinct bounded profiles"
+    },
+    {
+      "id": "fluent-251-quiet-mass-flow-readback",
+      "reason": "Signed mass flow and steady-time readback avoid noisy or invalid PyFluent 0.40.2 settings paths"
+    },
+    {
+      "id": "default-local-thickness-90-percent",
+      "reason": "The default local thickness ratio is 0.90 while the independent area ratio remains 0.95"
+    },
+    {
+      "id": "detached-engine-recovery-and-timeout",
+      "reason": "CLI loss no longer kills the engine; live and dead PID recovery paths are explicit"
+    },
+    {
+      "id": "bounded-lift-step-fail-fast",
+      "reason": "Stalled or Cl-infeasible design steps roll back to the finite smaller-step retry ladder"
+    },
+    {
+      "id": "nonzero-endpoint-anchor-clips",
+      "reason": "Leading and trailing edge iso-clips use nonzero one-sided coordinate ranges"
+    },
+    {
+      "id": "snapshot-heartbeats-and-linked-status",
+      "reason": "Heartbeat snapshots stay outside the event chain and plan status links to authoritative run state"
+    },
+    {
+      "id": "timestamped-unified-engine-log",
+      "reason": "Engine stdout and Fluent transcripts are mirrored with timestamped source markers"
+    },
+    {
+      "id": "ai-supervised-cgrid-candidates",
+      "reason": "MESH pauses for bounded AI proposals, real Fluent pilots, Pareto comparison and explicit acceptance"
+    },
+    {
+      "id": "research-continuation-uses-source-run-lift-gate",
+      "reason": "Continuation inherits and enforces the qualified source lift gate"
+    },
+    {
+      "id": "per-run-mesh-cell-budget",
+      "reason": "Schema, candidate evaluation, engine, worker and result validation share the task-specific max_cells budget"
+    },
+    {
+      "id": "signed-quarantine-only-experience-transfer",
+      "reason": "Imported experience cannot become positive evidence before local requalification"
+    },
+    {
+      "id": "single-authoritative-engine-tree",
+      "reason": "CLI and fixed workers consume src/airfoil_workflow/engine without external source copying"
+    },
+    {
+      "id": "candidate-geometry-ratio-gates",
+      "reason": "Minimum area and local thickness ratios are enforced on quick and validation geometry audits"
+    },
+    {
+      "id": "cli-only-surface",
+      "reason": "Browser GUI, external AI provider, and legacy mesh-repair page were removed"
+    }
+  ],
+  "excluded": [
+    "Fluent binaries and license",
+    "historic outputs",
+    ".venv and caches",
+    "credentials",
+    "external source paths"
+  ]
+}

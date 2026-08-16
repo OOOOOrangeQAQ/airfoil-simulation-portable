@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=70"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "airfoil-simulation-portable"
+version = "2.0.1"
+description = "Offline-first, policy-gated Fluent airfoil workflow"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "numpy==2.5.1",
+  "ansys-fluent-core==0.40.2",
+  "cryptography==45.0.7",
+  "pytest==9.0.2",
+]
+
+[project.scripts]
+airfoil-workflow = "airfoil_workflow.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["airfoil_workflow*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

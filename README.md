@@ -1,8 +1,6 @@
 # Airfoil Simulation Portable CLI
 
-面向 AI 受控调用的翼型仿真与优化 CLI 工作流，适用于 Windows、ANSYS Fluent 2025 R1 和 Python 3.12，别的版本没测试，我的电脑上也没有，谁测了发我看看😋。
-
-希望各位CFD同道能测试反馈一下啊，不过估计也没人看:(。我也不确定在别的电脑环境上能用不能，反正我自己的电脑用的没问题，目前已经测试过的ai有Codex-Chatgpt，Opencode-Deepseek-V4-Flash。别用V2.0.0,有BUG
+面向 AI 受控调用的翼型仿真与优化 CLI 工作流，适用于 Windows、ANSYS Fluent 2025 R1 和 Python 3.12。
 
 > English summary: an offline-first, policy-gated command-line workflow for airfoil meshing, Fluent simulation, optimization orchestration, resumable state management, and auditable AI interaction. The public interface is CLI-only. ANSYS Fluent and its license are not included.
 
@@ -20,8 +18,7 @@
 
 本项目不是 Fluent 的替代品，也不是已经完成生产级科学认证的气动数据库。当前科学资格为 **`PROVISIONAL`**，不能把程序正常结束或 screening pass 描述为生产级 CFD 结论。
 
-> `2.0.1rc1` 是 **Pre-release candidate**：用于公开审阅新的 AI 监督 C-grid 流程，不替代 `v2.0.0` 稳定基线，也不代表生产级 CFD 资格。V2.0.0版仅有三个固定的绘制模板，2.0.1rc1抛弃了固定的绘制流程，采用了灵活的绘制方式，并采用了多约束交叉监督，可能会有更优秀的网格质量，但是存在已知问题：ai可能会花费较长时间修改网格质量，该问题我可能会在下一个版本进行修复，我可能会1、修改门槛，给予ai较为宽松的确认方式。2、添加确认系统，询问用户可以接受的网格质量，不过我感觉第二步没必要，你们自己给ai说就行了。此外，将默认的压力—速度耦合算法设置为coupled，此前为SIMPLE。
-
+> `v2.0.1` 是当前正式软件版本，合并了 AI 监督 C-grid 网格流程和已观测到的非网格缺陷修复。正式软件发布不等于生产级 CFD 认证；科学证据状态仍为 **`PROVISIONAL`**。
 
 ## 主要功能
 
@@ -48,10 +45,14 @@
 
 - 主路径为结构化全四边形 C-grid；
 - O-grid 仅用于显式诊断，不作为静默 fallback；
-- `confirm` 后停在 `MESH`，AI 按便携 Skill 设计、实测并帕累托比较最多 5 个候选；
+- `confirm` 后停在 `MESH`，AI 按 `ai_contract/skills/optimize-airfoil-cgrid` 设计、实测并帕累托比较最多 5 个候选；
 - 不再自动运行 `distribution_repair_48k`，也不按单一最低 OQ 自动选网格；
 - GCI 候选网格为 25,182 / 44,098 / 77,340；
-- 网格门禁包含单元数、正交质量、偏斜率、边界层拓扑和边界覆盖；
+- 网格硬失败包括非正 Jacobian、负/零面积或体积、折叠/自交、错误连接、边界区错误、非纯四边形、Fluent 读入失败或超出任务单元上限；
+- Fluent 最小正交质量必须严格大于 `0.01`，但这只是安全底线，不是“优质网格”的单指标结论；
+- 质量报告分别覆盖前缘、上/下翼面边界层、尾缘、尾迹入口/核心/出口和远场，并报告 OQ、Skewness 分位数与坏单元占比、局部面积退化、壁面法向性、尾迹流向偏差和尺寸连续性；
+- 高长宽比边界层单元不会仅因 AR 被拒绝；AI 必须结合拉伸方向、正交性、局部流动物理、实际 y+ 和边界层总厚度判断；
+- 带软警告的候选必须完成 100 次一阶 Fluent 试算，并由 AI 给出可审计的帕累托验收理由；
 - 优化按“可行性优先、最小化阻力”执行，并保留面积、局部厚度和升力约束。
 
 ### 5. 可恢复、可审计状态
@@ -85,7 +86,7 @@ CLI 提供受控的经验导入/导出和内容寻址存储能力。运行期 le
 不熟悉 GitHub 的用户应打开仓库右侧 **Releases**，下载类似下面名称的 ZIP：
 
 ```text
-airfoil-simulation-portable-v2.0.0-windows-x64.zip
+airfoil-simulation-portable-v2.0.1-windows-x64.zip
 ```
 
 解压到不需要管理员权限的目录。不要直接在 ZIP 内运行，也不建议放在会实时同步或路径过长的目录。
@@ -113,7 +114,7 @@ py -3.12 -m venv .venv
 先做不会启动 Fluent 的 dry-run：
 
 ```powershell
-.\RUN_WORKFLOW.cmd plan --text '用 examples/naca4418.dat，弦长 1 米，速度 30 m/s，攻角 2 度，海拔 0 米，局部厚度至少 95%，Cl 至少 99.8%，目标降阻 0.5%，最多 12 次求解，本地运行，dry-run'
+.\RUN_WORKFLOW.cmd plan --text '用 examples/naca4418.dat，弦长 1 米，速度 30 m/s，攻角 2 度，海拔 0 米，局部厚度至少 90%，Cl 至少 99.8%，目标降阻 0.5%，最多 12 次求解，本地运行，dry-run'
 ```
 
 程序会返回 JSON。后续按状态执行：
@@ -188,10 +189,13 @@ v2.0.0 将程序收敛为 CLI-only，并处理了已知审计项：
 
 ## 当前验证状态
 
-- 源码树与干净便携发布副本：`164 passed, 7 subtests passed`；
+- 源码树与干净便携发布副本：`192 passed, 7 subtests passed`；
 - CLI 内置合同自检：`PASS`；
+- NACA0012 尖尾缘和 NACA2418 钝尾缘/B2 完成 AI 候选、真实 Fluent 结构检查与 100 次一阶试算；
+- NACA2418 在前两个候选后继续探索第三个针对性候选，没有按单一 OQ 自动回选默认网格；
 - NACA0012、NACA4418、NACA64-414 默认网格完成真实 Fluent 结构检查；
 - NACA4418 的 25,182 / 44,098 / 77,340 三档网格完成结构检查；
+- 真实 Fluent 2025 R1 启动/退出验证未留下 Fluent、Cortex 或 MPI 测试进程；
 - 科学资格仍为 `PROVISIONAL`：尚缺三档收敛 Cd/Cl GCI、冻结多翼型完整流场回归，以及至少一个非零形变候选通过全部生产级门禁的证据。
 
 验证详情见 `docs/CURRENT_VERIFICATION_ZH.md` 和 `docs/SCIENTIFIC_QUALIFICATION_ZH.md`。
@@ -206,7 +210,7 @@ airfoil_simulation_portable/
 ├─ examples/               示例翼型 DAT
 ├─ tests/                  离线回归测试
 ├─ docs/                   使用、审计、验证和移植说明
-├─ ai_contract/            AI 调用合同和修复提示资料
+├─ ai_contract/            AI 调用合同及可移植 C-grid 网格 Skill
 ├─ worker/                 固定 SSH worker 入口资料
 ├─ runtime/                便携 Python 3.12
 ├─ wheelhouse/             离线依赖 wheels 与哈希清单
