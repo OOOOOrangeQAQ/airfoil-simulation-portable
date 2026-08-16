@@ -1,0 +1,357 @@
+{
+  "airfoil_dat": "examples/naca0012.dat",
+  "stage1_config": "config/stage1_request.portable.example.json",
+  "output_root": "outputs",
+  "run_name": "",
+  "closure": "blunt",
+  "control_point_motion": "xy",
+  "product_version": "auto",
+  "processor_count": 1,
+  "start_timeout_seconds": 180,
+  "fluent_exe": null,
+  "mesh": {
+    "primary": "cgrid",
+    "recommended_cell_target": 50000,
+    "maximum_cells": 80000,
+    "allow_quality_warning": true,
+    "reuse_case_path": null,
+    "reuse_summary_path": null,
+    "repair_confirmation_path": null,
+    "cgrid": {
+      "n_airfoil_side": 214,
+      "n_bridge": 10,
+      "radial_layers": 58,
+      "wake_columns": 190,
+      "farfield_distance": 15.0,
+      "wake_length": 20.0,
+      "growth_rate": 1.12,
+      "bl_layers": 42,
+      "cst_order": 6,
+      "cst_regularization": 1e-5,
+      "cst_cosine_weight": 0.65,
+      "cst_le_power": 1.45,
+      "wake_beta": 5.0,
+      "wake_outer_beta": 0.8,
+      "wake_center_width": 0.30,
+      "outlet_center_cluster": 1.35,
+      "outlet_match_blend": 0.90,
+      "outlet_match_power": 0.85,
+      "outlet_distribution_mode": "quality-adaptive",
+      "inlet_arc_match_blend": 0.35,
+      "minimum_te_thickness": 0.00025,
+      "minimum_fluent_orthogonal_quality": 0.01,
+      "target_fluent_orthogonal_quality": 0.30,
+      "maximum_skewness": 0.98,
+      "non_wall_aspect_ratio_warning": 1000.0
+    }
+  },
+  "entry_modes": {
+    "normal": {
+      "description": "Ask only the operating condition and geometry inputs needed for a standard adjoint run."
+    },
+    "advanced": {
+      "description": "Use the editable advanced_settings, optimizer, and retry_profiles blocks below."
+    },
+    "debug": {
+      "description": "Read a selected or latest failed run and report evidence without changing files or launching Fluent."
+    }
+  },
+  "flow": {
+    "velocity_m_s": 32.5,
+    "altitude_m": 0.0,
+    "angle_of_attack_deg": 2.0,
+    "chord_m": 1.0,
+    "reference_area_m2": 1.0,
+    "reference_area_mode": "unit-span",
+    "reference_span_m": 1.0,
+    "target_y_plus": 1.0,
+    "turbulence_intensity": 0.01
+  },
+  "completion": {
+    "strict_adjoint_only": true,
+    "drag_must_decrease": true,
+    "lift_relative_tolerance": 0.002,
+    "minimum_lift_ratio": 0.998,
+    "require_stepwise_lift_to_drag_improvement": true,
+    "performance_targets_enabled": true,
+    "minimum_cumulative_cd_reduction": 0.005,
+    "minimum_cumulative_ld_improvement": 0.002
+  },
+  "shape_guard": {
+    "enabled": true,
+    "profile": "balanced",
+    "warning_fraction": 0.8,
+    "overrides": {
+      "max_chord_relative_change": null,
+      "max_le_displacement_over_chord": null,
+      "max_te_displacement_over_chord": null,
+      "max_cumulative_hausdorff_over_chord": null,
+      "max_incremental_hausdorff_over_chord": null,
+      "max_area_relative_change": null,
+      "max_thickness_relative_change": null
+    }
+  },
+  "optimization_run": {
+    "accept_recovered_attempts": false,
+    "strict_clean_morphing": true,
+    "candidate_selection_policy": "first-pass",
+    "force_stability": {
+      "enabled": true,
+      "iterations_per_block": 10,
+      "max_iterations": 100,
+      "relative_tolerance": 5e-6,
+      "consecutive_blocks": 2
+    },
+    "max_accepted_design_steps": 12,
+    "relative_cd_convergence": 0.0005,
+    "consecutive_converged_steps": 2,
+    "minimum_relative_drag_improvement": 5e-4,
+    "geometry_change": {
+      "minimum_displacement_over_chord": 1e-6
+    },
+    "numerical_uncertainty": {
+      "engineering_floor": 5e-4,
+      "required_repeats": 5,
+      "run_independent_reloads": true,
+      "aa_cd_values": []
+    },
+    "repair_on_profile_exhaustion": false,
+    "repair_profiles": [
+      {
+        "name": "repair_rbf_5e_6",
+        "tier": "repair",
+        "design_iterations": 1,
+        "flow_iterations": 1600,
+        "adjoint_iterations": 500,
+        "drag_step_percent": -0.000005,
+        "morpher_method": "radial-basis-function",
+        "post_design_flow_iterations": 10
+      },
+      {
+        "name": "repair_rbf_2e_6",
+        "tier": "repair",
+        "design_iterations": 1,
+        "flow_iterations": 1600,
+        "adjoint_iterations": 500,
+        "drag_step_percent": -0.000002,
+        "morpher_method": "radial-basis-function",
+        "post_design_flow_iterations": 10
+      },
+      {
+        "name": "repair_rbf_1e_6",
+        "tier": "repair",
+        "design_iterations": 1,
+        "flow_iterations": 1600,
+        "adjoint_iterations": 500,
+        "drag_step_percent": -0.000001,
+        "morpher_method": "radial-basis-function",
+        "post_design_flow_iterations": 10
+      },
+      {
+        "name": "repair_direct_interpolation_1e_6",
+        "tier": "repair",
+        "design_iterations": 1,
+        "flow_iterations": 1600,
+        "adjoint_iterations": 500,
+        "drag_step_percent": -0.000001,
+        "morpher_method": "direct-interpolation",
+        "post_design_flow_iterations": 10
+      },
+      {
+        "name": "repair_polynomials_1e_6",
+        "tier": "repair",
+        "design_iterations": 1,
+        "flow_iterations": 1600,
+        "adjoint_iterations": 500,
+        "drag_step_percent": -0.000001,
+        "morpher_method": "polynomials",
+        "post_design_flow_iterations": 10
+      }
+    ]
+  },
+  "cfd_qualification": {
+    "grid_convergence": null,
+    "note": "Populate grid_convergence with the PASS output of scripts/aggregate_grid_gci.py for production qualification."
+  },
+  "exports": {
+    "required": true,
+    "save_baseline_case_data": true,
+    "save_optimized_case_data": true,
+    "tecplot": {
+      "baseline_file": "exports/baseline/baseline.plt",
+      "optimized_file": "exports/optimized/optimized.plt",
+      "surface_only": true,
+      "surfaces": ["airfoil"],
+      "variables": []
+    },
+    "ensight": {
+      "baseline_prefix": "exports/baseline/baseline_ensight",
+      "optimized_prefix": "exports/optimized/optimized_ensight",
+      "variables": ["pressure", "velocity-magnitude", "x-velocity", "y-velocity"],
+      "optimized_sensitivity_prefix": "exports/optimized/optimized_sensitivity_ensight",
+      "export_sensitivity": false,
+      "sensitivity_required": false
+    },
+    "sensitivity": {
+      "optimized_file": "exports/optimized/optimized_shape_sensitivity.sens",
+      "export_after_adjoint": true
+    }
+  },
+  "iterations": {
+    "flow": 1200,
+    "adjoint": 350,
+    "design": 1
+  },
+  "advanced_settings": {
+    "solver": {
+      "solver_type": "pressure-based",
+      "time": "steady",
+      "viscous_model": "k-omega-sst",
+      "density": "ideal-gas",
+      "viscosity": "sutherland",
+      "boundary_topology": "velocity-inlet-pressure-outlet",
+      "inlet_zone": "velocity_inlet",
+      "outlet_zone": "pressure_outlet",
+      "farfield_boundary_type": "velocity-inlet",
+      "wall_zone": "airfoil",
+      "farfield_zone": "velocity_inlet"
+    },
+    "solution_methods": {
+      "pressure_velocity_coupling": "coupled",
+      "flux_type": "Rhie-Chow: momentum based",
+      "gradient": "least-squares-cell-based",
+      "pressure": "second-order",
+      "first_order_pressure": "standard",
+      "momentum": "second-order-upwind",
+      "turbulent_kinetic_energy": "second-order-upwind",
+      "specific_dissipation_rate": "second-order-upwind"
+    },
+    "solution_controls": {
+      "initialization": "standard",
+      "courant_number": 2.0,
+      "explicit_relaxation": {
+        "pressure": 0.25,
+        "momentum": 0.25
+      },
+      "limits": {
+        "max_turb_visc_ratio": 100000.0
+      },
+      "flow_ramp": {
+        "first_order_iterations": 100
+      }
+    },
+    "residual_criteria": {
+      "continuity": 1e-5,
+      "x_velocity": 1e-5,
+      "y_velocity": 1e-5,
+      "k": 1e-5,
+      "omega": 1e-5
+    },
+    "convergence_criteria": {
+      "optimizer": 5e-4,
+      "cd_change": 1e-5,
+      "cl_change": 1e-5
+    },
+    "adjoint_solver": {
+      "method": "balanced",
+      "stabilization_second_scheme_iterations": 60,
+      "residual_criteria": {
+        "adjoint_continuity": 1e-5,
+        "adjoint_x_velocity": 1e-4,
+        "adjoint_y_velocity": 1e-5
+      }
+    },
+    "design_tool": {
+      "modifiable_zones": ["airfoil"],
+      "x_control_points": 24,
+      "y_control_points": 8,
+      "morpher": {
+        "method": "radial-basis-function",
+        "constraint_method": "standard",
+        "polynomials": {
+          "preconditioning_standard": 10.0,
+          "preconditioning_enhanced": 10.0,
+          "mask_shape_sensitivity": true
+        },
+        "rbf": {
+          "max_iterations": 10,
+          "linear_solver_tolerance": 1e-5,
+          "max_subiteration": 100,
+          "number_of_modes": 40
+        }
+      },
+      "shape_anchors": {
+        "enabled": true,
+        "mode": "endpoints-only",
+        "max_anchor_displacement_over_chord": 0.0
+      },
+      "thickness_constraint": {
+        "enabled": true,
+        "clearance_percent_of_baseline_max_thickness": 5.0,
+        "minimum_local_thickness_ratio": 0.90,
+        "minimum_area_ratio": 0.95,
+        "samples": 401
+      },
+      "control_region_source": "get-bounds-from-airfoil",
+      "constraint_type": "geometry-audit"
+    },
+    "optimizer": {
+      "objective": "minimize_cd",
+      "constraint": "cl_not_lower_than_baseline_with_tolerance",
+      "objective_strategy": "drag-with-lift-bound",
+      "objective_row_order": ["cd", "cl"],
+      "objective_binding_strategy": "auto",
+      "drag_step_percent": -0.15,
+      "lift_step_percent": 0.05,
+      "lift_runtime_bound_ratio": 0.999,
+      "lift_bound_tolerance_percent": 0.02,
+      "lift_force_report_to_observable_factor": 1.0,
+      "autosave_every_design_iterations": 1,
+      "post_design_flow_iterations": 10,
+      "min_orthogonal_quality": "fluent-default"
+    }
+  },
+  "optimizer": {
+    "design_iterations": 1,
+    "flow_iterations": 1200,
+    "adjoint_iterations": 350
+  },
+  "retry_profiles": [
+    {
+      "name": "first_shrink_lift_guard",
+      "design_iterations": 1,
+      "flow_iterations": 1600,
+      "adjoint_iterations": 500,
+      "drag_step_percent": -0.10,
+      "lift_force_report_to_observable_factor": 1.0,
+      "post_design_flow_iterations": 10
+    },
+    {
+      "name": "second_shrink_recovery",
+      "design_iterations": 1,
+      "flow_iterations": 1600,
+      "adjoint_iterations": 500,
+      "drag_step_percent": -0.05,
+      "lift_force_report_to_observable_factor": 1.0,
+      "post_design_flow_iterations": 8
+    },
+    {
+      "name": "third_shrink_feasibility_probe",
+      "design_iterations": 1,
+      "flow_iterations": 1600,
+      "adjoint_iterations": 500,
+      "drag_step_percent": -0.02,
+      "lift_force_report_to_observable_factor": 1.0,
+      "post_design_flow_iterations": 10
+    },
+    {
+      "name": "fourth_shrink_budget_probe",
+      "design_iterations": 1,
+      "flow_iterations": 1600,
+      "adjoint_iterations": 500,
+      "drag_step_percent": -0.01,
+      "lift_force_report_to_observable_factor": 1.0,
+      "post_design_flow_iterations": 10
+    }
+  ]
+}
