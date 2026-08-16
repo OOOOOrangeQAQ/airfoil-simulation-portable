@@ -1,0 +1,32 @@
+{
+  "schema_version": "2.0",
+  "geometry": {
+    "airfoil_path": "REPLACE_WITH_A_DAT_FILE.dat",
+    "airfoil_sha256": "REPLACE_WITH_64_LOWERCASE_SHA256_CHARACTERS__________",
+    "closure": "auto"
+  },
+  "flow": {
+    "chord_m": 1.0,
+    "velocity_m_s": 32.5,
+    "angle_of_attack_deg": 2.0,
+    "altitude_m": 0.0
+  },
+  "constraints": {
+    "minimum_area_ratio": 0.95,
+    "minimum_local_thickness_ratio": 0.90,
+    "minimum_lift_ratio": 0.998
+  },
+  "objective": {
+    "kind": "minimize_cd_feasibility_first",
+    "minimum_cd_reduction_ratio": 0.005,
+    "max_solver_evaluations": 12
+  },
+  "mesh": {
+    "target_cells": 48458,
+    "max_cells": 80000
+  },
+  "execution": {
+    "kind": "local",
+    "dry_run": true
+  }
+}
