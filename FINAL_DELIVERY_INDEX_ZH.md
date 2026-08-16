@@ -1,11 +1,11 @@
 # 最终交付索引
 
-当前正式软件版本为 `v2.0.1`，便携目录为 `dist\airfoil-simulation-portable-v2.0.1-windows-x64`。软件正式发布与 CFD 科学资格相互独立；当前科学证据仍为 `PROVISIONAL`。
+当前正式软件版本为 `v2.0.2`，便携目录为 `dist\airfoil-simulation-portable-v2.0.2-windows-x64`。软件正式发布与 CFD 科学资格相互独立；当前科学证据仍为 `PROVISIONAL`。
 
 ## 当前结论
 
-- 工程实现：AI 监督 C-grid 网格更新与已观测到的非网格缺陷修复均已合并。
-- 回归：源码树和候选发布副本均为 `192 passed, 7 subtests passed`，并通过真实 Fluent 2025 R1 启停零残留检查。
+- 工程实现：AI 监督 C-grid、AI 全失败后的一次性原固定 C-grid 受审回退，以及已观测到的非网格缺陷修复均已合并。
+- 回归：源码树和正式发布副本均为 `196 passed, 7 subtests passed`，并通过真实 Fluent 2025 R1 启停零残留检查。
 - 一句话 dry-run：计划、一次确认、幂等状态机、严格 run_id 结果绑定与经验账本均已闭环。
 - 交互面：仅保留 CLI；GUI、第三方 AI 页面和旧 GUI mesh-repair 已删除。
 - 真实 Fluent 网格：NACA0012、NACA4418、NACA64-414 默认网格，以及 NACA4418 的 25,182/44,098/77,340 三档均完成结构检查。

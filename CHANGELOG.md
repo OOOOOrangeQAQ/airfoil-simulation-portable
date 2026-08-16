@@ -1,10 +1,19 @@
 # Changelog
 
+## 2.0.2 - 2026-08-16
+
+- Kept the AI-supervised structured all-quadrilateral C-grid as the primary mesh path.
+- Preserved the original 48,458-cell C-grid implementation and parameters as a one-shot, explicitly invoked fallback only after every AI candidate is ineligible.
+- Applied the same structural, Fluent-read, cell-budget, minimum-OQ, 100-iteration pilot and explicit AI acceptance gates to the fallback; the former `distribution_repair_48k` ladder remains disabled.
+- Expanded the README with the complete mesh design method, AI audit rules, tested-airfoil results, known C-wrap transition limitation and a cleanup inventory for historical workspace artifacts.
+- Kept scientific qualification at `PROVISIONAL`; this release does not claim grid independence or production-qualified CFD evidence.
+
 ## 2.0.1 - 2026-08-16
 
 - Promoted the reviewed `2.0.1rc1` AI-supervised C-grid workflow and `2.0.1rc2` observed-bug fixes to the stable software release.
 - Added region-aware C-grid diagnostics for OQ/skewness distributions, upper/lower boundary layers, local area degeneration, wall-normal alignment and wake-direction alignment.
 - Replaced fixed mesh retry selection with bounded AI candidate evaluation, a 100-iteration first-order Fluent pilot and explicit Pareto acceptance.
+- Preserved the unchanged legacy 48,458-cell C-grid as a one-shot, explicitly invoked and fully audited fallback only after every AI candidate is ineligible; it never re-enables the old retry ladder.
 - Changed the default pressure-velocity coupling to `Coupled` and the default minimum local-thickness ratio to 90%.
 - Fixed Fluent session cleanup, mass-flow/time readback, resume state, evaluation-budget enforcement, result classification and Chinese intent aliases.
 - Kept scientific qualification at `PROVISIONAL`; stable software status does not claim mesh independence or production-qualified CFD evidence.

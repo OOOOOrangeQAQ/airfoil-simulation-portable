@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "airfoil-simulation-portable"
-version = "2.0.1"
+version = "2.0.2"
 description = "Offline-first, policy-gated Fluent airfoil workflow"
 requires-python = ">=3.12,<3.13"
 dependencies = [
